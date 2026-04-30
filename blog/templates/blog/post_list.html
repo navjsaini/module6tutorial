@@ -8,8 +8,8 @@
     <div>
         <h3>
             <a href="{% url 'post_detail' pk=post.pk %}">
-                {{ post.title }}
-            </a>
+    Comments: {{ post.comments.count }}
+</a>
         </h3>
 
         <p>{{ post.text }}</p>

@@ -2,12 +2,24 @@
 
 {% block content %}
 
-<a href="/">← Back</a>
-
-<h1>{{ post.title }}</h1>
+{% if user.is_authenticated %}
+    <a href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+{% endif %}<h1>{{ post.title }}</h1>
 
 <p>{{ post.text }}</p>
 
 <p>Published: {{ post.published_date }}</p>
-
+<hr>
+<a href="{% url 'add_comment_to_post' pk=post.pk %}">
+    Add Comment
+</a>
+{% for comment in post.comments.all %}
+    <div class="comment">
+        <div class="date">{{ comment.created_date }}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text }}</p>
+    </div>
+{% empty %}
+    <p>No comments yet</p>
+{% endfor %}
 {% endblock %}

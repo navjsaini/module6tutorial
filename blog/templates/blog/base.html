@@ -8,6 +8,19 @@
 <body>
 
     <header>
+       {% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" class="top-menu">+</a>
+    <p id="logout" class="top-menu">
+        Hello {{ user.username }}
+<form action="{% url 'logout' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background:none; border:none; color:rgb(250, 12, 12);">
+        (Log out)
+    </button>
+</form>    </p>
+{% else %}
+    <a href="{% url 'login' %}" class="top-menu">Login</a>
+{% endif %}
         <h1><a href="/">My Django Blog</a></h1>
         <hr>
     </header>
